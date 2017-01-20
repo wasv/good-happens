@@ -1,0 +1,6 @@
+*.swp
+*.db
+*.key
+env/
+*.pyc
+.#*
