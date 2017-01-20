@@ -69,3 +69,9 @@ def view_yearly(event):
 @app.before_first_request
 def flask_init_db():
     init_db()
+
+@app.teardown_request
+def session_clear(exception=None):
+    db.remove()
+    if exception and db.is_active:
+        db.rollback()
