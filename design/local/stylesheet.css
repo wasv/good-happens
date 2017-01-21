@@ -1,0 +1,53 @@
+
+body {
+    padding-top: 20px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 20px;
+    color: #f27280;
+    background-color: #f2edd8;
+    font-family: 'Bitter', serif;
+}
+
+counter {
+    color: #44b3c2;
+    text-size: 50px;
+}
+
+h1 {
+    text-align: center;
+    color: #44b3c2;
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 30px;
+    word-spacing: 5px;
+}
+
+.emoji {
+    padding: 10%;
+}
+
+.icon {
+    display: inline-block;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.faces {
+    text-align: center;
+}
+
+@media screen and (max-width:680px) {
+    h1 {
+        font-size: 40px;
+    }
+
+    img{
+        height: 100px;
+    }
+}
