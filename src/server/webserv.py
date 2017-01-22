@@ -22,7 +22,7 @@ def index():
     return send_from_directory('static','index.html')
 
 @app.route("/stats")
-def index():
+def stats():
     return send_from_directory('static','stats.html')
 
 @app.route("/count/new/<event>")
