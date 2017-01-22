@@ -21,6 +21,10 @@ def favicon():
 def index():
     return send_from_directory('static','index.html')
 
+@app.route("/stats")
+def index():
+    return send_from_directory('static','stats.html')
+
 @app.route("/count/new/<event>")
 def inc_count(event):
     if event.lower() not in counters:
@@ -67,7 +71,7 @@ def view_advanced():
     if resolution is not None:
         events = events.group_by(sa.extract(resolution,Event.timestamp))
 
-    event_list = []
+    data = {'sm':[], 'lo':[], 'la':[]}
     for event in events.all():
         dict_event = {'count':event[4]}
         if resolution == 'day':
@@ -79,13 +83,13 @@ def view_advanced():
         else:
             dict_event['date'] = 'all'
 
-        if event_type == 'all':
-            dict_event['event_type'] = event[3]
-        event_list.append(dict_event)
+        data[event[3]].append(dict_event)
 
+    data['sm'].sort(key=lambda x: x['date'])
+    data['lo'].sort(key=lambda x: x['date'])
+    data['la'].sort(key=lambda x: x['date'])
 
-    print(event_list)
-    data = {'data': sorted(event_list, key=lambda x: x['date'])}
+    print(data)
 
     return make_response(jsonify(data),{'Content-Type':'application/json'})
 

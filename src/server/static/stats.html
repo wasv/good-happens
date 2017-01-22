@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <!-- Plotly.js -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    </head>
+
+    <body>
+
+        <div id="myDiv" style="width: 480px; height: 400px;"><!-- Plotly chart will be drawn inside this DIV --></div>
+        <script>
+         xmlhttp=new XMLHttpRequest();
+         xmlhttp.onreadystatechange=function() {
+             if (this.readyState==4 && this.status==200) {
+                 console.log(this.responseText);
+                 var data = JSON.parse(this.responseText);
+                 var sm_trace = {
+                     x: data['sm'].map(function(x) {return x.date;}),
+                     y: data['sm'].map(function(x) {return x.count;}),
+                     name: 'Smiling',
+                     type: 'bar'
+                 };
+                 var lo_trace = {
+                     x: data['lo'].map(function(x) {return x.date;}),
+                     y: data['lo'].map(function(x) {return x.count;}),
+                     name: 'Loved',
+                     type: 'bar'
+                 };
+                 var la_trace = {
+                     x: data['la'].map(function(x) {return x.date;}),
+                     y: data['la'].map(function(x) {return x.count;}),
+                     name: 'Laughing',
+                     type: 'bar'
+                 };
+
+                 var data = [sm_trace, lo_trace, la_trace];
+
+                 var layout = {
+                     barmode: 'stack',
+                     xaxis: {autorange: 'reversed'}
+                 };
+
+                 Plotly.newPlot('myDiv', data, layout);
+             }
+         }
+         var request = {
+             "event_type":"all",
+             "resolution":"day"
+         };
+         xmlhttp.open("POST","/count",true);
+         xmlhttp.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+         xmlhttp.send(JSON.stringify(request));
+        </script>
+    </body>
+</html>
