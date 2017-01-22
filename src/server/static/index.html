@@ -27,6 +27,29 @@
                 <h2>loved!</h2>
             </div>
         </div>
+        <div class="numbers">
+            <div>
+                <h1><span class="pink" id="total">_</span> people have had good days.</h1>
+            </div>
+            <div>
+                <p>More specifically:</p>
+                <p><span class="blue-text" id="number-today-sm">_</span> people felt <span class="blue-text">happy</span> in the last <span class="blue-text">day</span>!</p>
+                <p><span class="blue-text" id="number-today-la">_</span> people <span class="blue-text">laughed</span> in the last <span class="blue-text">day</span>!</p>
+                <p><span class="blue-text" id="number-today-lo">_</span> people felt <span class="blue-text">loved</span> in the last <span class="blue-text">day</span>!</p>
+                <hr>
+            </div>
+            <div class="weeks">
+                <p><span class="blue-text" id="number-week-sm">_</span> people felt <span class="blue-text">happy</span> in the last <span class="blue-text">week</span>!</p>
+                <p><span class="blue-text" id="number-week-la">_</span> people <span class="blue-text">laughed</span> in the last <span class="blue-text">week</span>!</p>
+                <p><span class="blue-text" id="number-week-lo">_</span> people felt <span class="blue-text">loved</span> in the last <span class="blue-text">week</span>!</p>
+                <hr>
+            </div>
+            <div class="months">
+                <p><span class="blue-text" id="number-month-sm">_</span> people felt <span class="blue-text">happy</span> in the last <span  class="blue-text">month</span>!</p>
+                <p><span class="blue-text" id="number-month-la">_</span> people <span class="blue-text">laughed</span> in the last <span class="blue-text">month</span>!</p>
+                <p><span class="blue-text" id="number-month-lo">_</span> people felt <span class="blue-text">loved</span> in the last <span class="blue-text">month</span>!</p>
+            </div>
+        </div>
         <footer></footer>
         <script>
          function count(event_type) {
@@ -34,11 +57,54 @@
             xmlhttp.onreadystatechange=function() {
               if (this.readyState==4 && this.status==200) {
                 console.log(this.responseText);
+                location.reload();
               }
             }
             xmlhttp.open("GET","/count/new/"+event_type,true);
             xmlhttp.send();
          }
+        
+            
+        function getCount(event_type, timespan) {
+            xmlhttp=new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+              if (this.readyState==4 && this.status==200) {
+                console.log(this.responseText);
+                document.getElementById("number-"+timespan + "-" + event_type).innerHTML=this.responseText;
+              }
+            }
+            xmlhttp.open("GET","/count/view/"+event_type+"/"+timespan,true);
+            xmlhttp.send();
+         }
+            
+        
+        function getTotal() {
+            xmlhttp=new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+              if (this.readyState==4 && this.status==200) {
+                console.log(this.responseText);
+                document.getElementById("total").innerHTML=this.responseText;
+              }
+            }
+            xmlhttp.open("GET","/count/view/",true);
+            xmlhttp.send();
+         }
+            getCount("sm", "today");
+            getCount("la", "today");
+            getCount("lo","today");
+            
+            getCount("sm", "week");
+            getCount("la", "week");
+            getCount("lo","week");
+            
+            getCount("sm", "month");
+            getCount("la", "month");
+            getCount("lo","month");
+            
+            getTotal();
+            
+            
+            
         </script>
 	  </body>
 </html>
