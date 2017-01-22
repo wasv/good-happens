@@ -89,8 +89,6 @@ def view_advanced():
     data['lo'].sort(key=lambda x: x['date'])
     data['la'].sort(key=lambda x: x['date'])
 
-    print(data)
-
     return make_response(jsonify(data),{'Content-Type':'application/json'})
 
 @app.route("/count/view/")
