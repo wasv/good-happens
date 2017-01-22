@@ -82,6 +82,10 @@ p {
     font-size: 36px;
 }
 
+.years p{
+    font-size: 39px;
+}
+
 hr {
     height: 3px;
     background-color: #f27280;
