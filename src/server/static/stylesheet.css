@@ -51,3 +51,11 @@ h2 {
         height: 100px;
     }
 }
+
+.numbers {
+    display: inline-block;
+}
+
+.numbers h1 {
+    font-size: 150px;
+}
