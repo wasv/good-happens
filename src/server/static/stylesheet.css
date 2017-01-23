@@ -87,8 +87,12 @@ p {
 }
 
 hr {
-    height: 3px;
-    background-color: #f27280;
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 4px solid #f27280;
+    margin: 1em 0;
+    padding: 0;
 }
 footer {
     text-align: center;
