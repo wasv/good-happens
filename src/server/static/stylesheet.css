@@ -90,3 +90,10 @@ hr {
     height: 3px;
     background-color: #f27280;
 }
+footer {
+    text-align: center;
+}
+
+a:link {
+    color: #44b3c2;
+}
